@@ -1,0 +1,13 @@
+Item #,Qty,Manufacturer,Mfg Part #,Description,Where it goes,Notes
+1,1,Raspberry Pi,CM5104032,"Compute Module 5: wireless, 4 GB RAM, 32 GB eMMC",On J2/J3,US$140 list (Nov 2026 product brief). CM5102032 (2 GB) suits a unit without screens: US$107.50
+2,1,Raspberry Pi,,"Cooler for Compute Module 5 (heatsink)",On the CM5,Needed in a closed case
+3,1,Raspberry Pi,,"Antenna Kit (external 2.4/5 GHz antenna, SMA bulkhead, U.FL cable)",Back panel WI-FI hole,The antenna Raspberry Pi tested with the module; keeps the wireless approvals valid
+4,1,Raspberry Pi,,RTC battery (rechargeable lithium manganese cell with JST SH lead),J11,Keeps the clock without power or internet
+5,1,Raspberry Pi,,27 W USB-C power supply (5.1 V 5 A),Back panel POWER,Region-specific plug
+6,1,Any,,"3 mm light pipe, 10 mm long",Front panel status light,
+7,4,Any,,M2.5 x 5 pan-head screw,Board to base standoffs,
+8,4,Any,,M3 x 30 countersunk screw (stainless),Base to lid,
+9,4,Any,,M3 heat-set insert (for printed lids) or tapped hole (for aluminium),Lid bosses,
+10,4,Any,,"Self-adhesive rubber foot, 10 mm",Base recesses,
+11,1,Case,case/out/case-base.stl,Base tray,,"See docs/PCBWAY-ORDER.md, Case"
+12,1,Case,case/out/case-lid.stl,Lid with the Cecilia mark,,"See docs/PCBWAY-ORDER.md, Case"

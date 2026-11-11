@@ -1,0 +1,39 @@
+Item #,Designator,Qty,Manufacturer,Mfg Part #,Description / Value,Package/Footprint,Type,Your Instructions / Notes
+1,J1,1,GCT,USB4105-GF-A,"USB Type-C receptacle, 16-pin, power and CC only",SMD + through-hole tabs,SMD,Power input
+2,U1,1,STMicroelectronics,STUSB4500QTR,USB Power Delivery sink controller; programmed to request 5 V up to 5 A,QFN-24 4x4,SMD,NVM settings in docs/SPEC.md
+3,Q1,1,Vishay,SiS443DN-T1-GE3,"P-channel MOSFET, VBUS power switch driven by U1",PowerPAK 1212-8,SMD,CHECK part: needs >= 6 A and low on-resistance
+4,D1,1,Littelfuse,SMBJ5.0A,TVS diode on 5 V input,SMB,SMD,
+5,F1,1,Littelfuse,1812L600/12MR,"Resettable fuse, 6 A hold",1812,SMD,CHECK rating against 5 A load
+6,U2,1,Texas Instruments,TPS2553DBVR,Current-limited power switch for the USB-A port (set to 1.2 A),SOT-23-6,SMD,
+7,U3,1,Diodes Inc,AP2112K-3.3TRG1,"3.3 V LDO, 600 mA, for the MIDI bridge and audio",SOT-23-5,SMD,
+8,"J2, J3",2,Hirose,DF40C-100DS-0.4V(51),"Compute Module 5 board-to-board connector, 100-pin, 0.4 mm",SMD,SMD,As on the Raspberry Pi CM5 IO Board
+9,J4,1,Wurth Elektronik,7499111121A,"RJ45 with integrated Gigabit magnetics and LEDs",Through-hole,THT,CHECK footprint; CM5 has the Ethernet PHY on board
+10,J5,1,Wurth Elektronik,692122030100,USB 3.0 Type-A receptacle (for organs with a USB port),Through-hole,THT,CHECK part
+11,U4,1,Texas Instruments,TPD4EUSB30DQAR,ESD protection for the USB 3.0 port,USON-10,SMD,
+12,"J6, J7",2,Amphenol,10029449-111RLF,HDMI Type-A receptacle (console screens),SMD,SMD,
+13,"U5, U6",2,Texas Instruments,TPD12S016PWR,HDMI companion: ESD and level shifting,TSSOP-24,SMD,
+14,U7,1,Raspberry Pi,RP2040,Microcontroller: USB MIDI bridge (appears to the CM5 as a standard USB MIDI device),QFN-56 7x7,SMD,Firmware loaded over USB (UF2)
+15,U8,1,Winbond,W25Q16JVUXIQ,"2 MB QSPI flash for U7",USON-8 2x3,SMD,
+16,Y1,1,Abracon,ABM8-272-T3,"12 MHz crystal for U7",3.2x2.5 mm,SMD,
+17,"J8, J9",2,CUI Devices,SDS-50J,"5-pin DIN socket, 180 degree, PCB mount (MIDI IN, MIDI OUT)",Through-hole,THT,Front panel
+18,U9,1,onsemi,H11L1SR2M,Optocoupler for MIDI IN (Schmitt output),SMD-6,SMD,Isolation as the MIDI 1.0 specification requires
+19,D2,1,onsemi,1N4148W,Reverse-protection diode across the MIDI IN optocoupler LED,SOD-123,SMD,
+20,U10,1,Texas Instruments,SN74LVC1G125DBVR,Buffer driving MIDI OUT,SOT-23-5,SMD,
+21,"FB1, FB2",2,Murata,BLM18PG221SN1D,Ferrite beads on MIDI OUT pins 4 and 5,0603,SMD,
+22,U11,1,Texas Instruments,PCM5102APWR,"I2S audio DAC, line out (simulator and spoken prompts)",TSSOP-20,SMD,
+23,J10,1,CUI Devices,SJ1-3523N,"3.5 mm stereo jack, line out",Through-hole,THT,Front panel
+24,J11,1,JST,SM02B-SRSS-TB(LF)(SN),"2-pin JST SH, RTC backup battery",SMD,SMD,For the Raspberry Pi RTC battery
+25,J12,1,JST,SM04B-SRSS-TB(LF)(SN),"4-pin JST SH, optional fan (PWM, tacho)",SMD,SMD,Do not fit unless a fan is used
+26,LED1,1,Kingbright,APTF1616SEEZGQBDC,"RGB status LED, under the front light pipe",1.6x1.6 mm,SMD,CHECK part
+27,SW1,1,C&K,PTS645VL58-2 LFS,"Right-angle 6 mm tactile switch: power and safe shutdown",Through-hole,THT,CHECK part; front panel button
+28,"R1, R2",2,Any,,27 ohm 1% (RP2040 USB D+/D-),0402,SMD,
+29,R3,1,Any,,220 ohm 1% (MIDI IN current limit),0402,SMD,
+30,R4,1,Any,,470 ohm 1% (MIDI IN pull-up),0402,SMD,
+31,"R5, R6",2,Any,,"33 ohm and 10 ohm 1% (MIDI OUT, MIDI 1.0 3.3 V electrical spec)",0603,SMD,
+32,"R7-R9",3,Any,,1 k 1% (status LED),0402,SMD,
+33,"R10-R16",7,Any,,"10 k 1% (pull-ups, BOOTSEL, enables)",0402,SMD,Final count from schematic
+34,"C1-C30",30,Any,,"100 nF 16 V X7R (decoupling)",0402,SMD,Final count from schematic
+35,"C31-C40",10,Any,,"1 uF 16 V X7R",0402,SMD,Final count from schematic
+36,"C41-C48",8,Any,,"10 uF 10 V X5R",0603,SMD,Final count from schematic
+37,"C49-C52",4,Any,,"47 uF 10 V (bulk, 5 V input and USB-A)",1206,SMD,Final count from schematic
+38,"C53, C54",2,Any,,15 pF C0G (crystal load),0402,SMD,

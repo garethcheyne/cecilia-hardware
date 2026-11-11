@@ -1,0 +1,15 @@
+{
+  "name": "cecilia-case",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-case.mjs",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@jscad/modeling": "^2.13.0",
+    "@jscad/stl-serializer": "^2.1.23",
+    "opentype.js": "^2.0.0",
+    "three": "^0.187.0"
+  }
+}

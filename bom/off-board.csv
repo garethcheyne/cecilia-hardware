@@ -1,20 +1,26 @@
 Item #,Qty,Manufacturer,Mfg Part #,Description,Where it goes,Notes
-1,1,Raspberry Pi,,"Raspberry Pi 5, 4 GB",On the lower standoffs,2 GB is enough without console screens; any Pi 5 from any shop fits
-2,1,Raspberry Pi,,Raspberry Pi 27 W USB-C power supply (5.1 V 5 A),Back panel USB-C 5V,Region-specific plug; keeps the unit within Raspberry Pi's tested setup
-3,1,Any,,"Low-profile heatsink for the Pi 5 SoC (under 8 mm tall)",On the Pi 5,CHECK clearance under the HAT; Raspberry Pi's Active Cooler if it fits
+1,1,Raspberry Pi,,"Raspberry Pi 5, 4 GB",On four bosses at the back,4 GB suits two touch screens; any Pi 5 from any shop fits
+2,1,Raspberry Pi,,Raspberry Pi 27 W USB-C power supply (5.1 V 5 A),Back panel USB-C 5V,Region-specific plug
+3,1,Raspberry Pi,,Raspberry Pi Active Cooler,On the Pi 5,Fits under the DAC+
 4,1,Raspberry Pi,,"microSD card, 32 GB, A2",Pi 5 card slot,Flashed with the Cecilia image (Raspberry Pi Imager)
-5,1,Any,,"1.3 inch OLED module, 128x64, SH1106, I2C (4-pin)",Front panel window,CHECK the hole spacing (case expects 30.4 x 28.5 mm)
-6,1,Any,,"3 mm LED with panel clip, green, on a 2-pin JST SH lead",Front panel status light,
-7,1,Any,,"4-wire JST SH cable, 100 mm",OLED to HAT J5,
-8,1,Any,,"4-wire JST SH cable, 100 mm",Button board to HAT J7,
-9,1,Any,,"2-wire lead, JST SH to the Pi 5's power-button header",HAT J8 to Pi 5 J2,CHECK the J2 connector type
-10,4,Any,,"M2.5 x 12 mm brass standoff, male-female",Pi to HAT (through the Pi into the base),
-11,4,Any,,"M2.5 x 25 mm brass standoff, male-female",HAT to lid,
-12,4,Any,,M2.5 x 6 countersunk screw (stainless),Lid into the standoffs,
-13,4,Any,,M2.5 heat-set insert,Base bosses under the Pi,
-14,6,Any,,M2 x 5 self-tapping screw for plastic,OLED module and button board to their bosses,
-15,4,Any,,"Self-adhesive rubber foot, 10 mm",Base recesses,
-16,1,Case,case/out/case-base.stl,Base tray,,"See docs/PCBWAY-ORDER.md, Case"
-17,1,Case,case/out/case-lid.stl,Lid with the Cecilia mark,,"See docs/PCBWAY-ORDER.md, Case"
-18,1,Case,case/out/case-window.stl,"Smoked window for the OLED (1 mm, tinted)",Front panel rebate,Cut from 1 mm smoked acrylic or polycarbonate
-19,1,Case,,"ON/OFF button cap (printed, 5.8 mm)",Back panel,Print with the case
+5,1,Any,,"3.12 inch OLED module, 256x64, SSD1322, 4-wire SPI, white",Behind the front window,CHECK: module outline no more than 100 x 31 mm; active area 76.8 x 19.2 mm
+6,1,Raspberry Pi,,"Raspberry Pi DAC+ (optional)",On the Pi's header,For units with no organ: plugs into the church sound system; comes with its own standoffs
+7,2,Any,,"Micro HDMI (male) to HDMI (female) panel-mount cable, 30 cm, with screw flange",Pi to back panel HDMI 1 and HDMI 2,CHECK flange screw spacing (case expects 26 mm)
+8,1,Any,,"USB-C (male) to USB-C (female) panel-mount extension, 30 cm, rated 5 A",Pi to back panel USB-C 5V,CHECK the Pi 5 still reports a 5 A supply through it; flange screws 20 mm apart
+9,2,Any,,"RCA (phono) female-female through-panel coupler, M8",Back panel AUDIO L and R,Fit blanking caps when there is no DAC+
+10,2,Any,,"RCA (phono) male-male lead, 30 cm",DAC+ to the couplers,Only with the DAC+
+11,1,Any,,"12 mm momentary pushbutton with ring light (5 V), on a lead",Back panel ON/OFF,CHECK depth behind the panel (under 22 mm)
+12,1,Any,,"7 mm flush momentary pushbutton",Back panel RESET,Flush so it takes a pen tip
+13,1,Any,,"40-way IDC ribbon, 2.54 mm, about 10 cm, female both ends",Pi (or DAC+) header to I/O board J1,
+14,1,Any,,"8-wire JST SH cable, 150 mm",I/O board J4 to the display,
+15,1,Any,,"4-wire and 2 x 2-wire JST SH leads",Buttons and the Pi's power-button header,
+16,8,Any,,M2.5 heat-set insert,Bosses under the Pi and the I/O board,
+17,8,Any,,M2.5 x 6 pan-head screw,Pi (without the DAC+) and I/O board,With the DAC+: its standoffs replace four of these
+18,4,Any,,M3 heat-set insert,Tops of the corner pillars,
+19,4,Any,,M3 x 8 countersunk screw (stainless),Lid into the pillars,
+20,4,Any,,M2.5 x 5 self-tapping screw for plastic,Display module to its bosses,
+21,4,Any,,M3 x 6 screw and nut,HDMI and USB-C panel flanges,
+22,4,Any,,"Self-adhesive rubber foot, 12 mm",Base recesses,
+23,1,Case,case/out/case-base.stl,Base tray,,"See docs/PCBWAY-ORDER.md, Case"
+24,1,Case,case/out/case-lid.stl,Lid with the Cecilia mark,,"See docs/PCBWAY-ORDER.md, Case"
+25,1,Case,case/out/case-window.stl,"Smoked window for the display (1 mm, tinted)",Front rebate,Cut from 1 mm smoked acrylic or polycarbonate

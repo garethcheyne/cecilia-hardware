@@ -1,0 +1,18 @@
+Item #,Designator,Qty,Manufacturer,Mfg Part #,Description / Value,Package/Footprint,Type,Your Instructions / Notes
+1,J1,1,Any,,"2x20 shrouded box header, 2.54 mm, for a 40-way IDC ribbon",Through-hole,THT,Keyed; the ribbon comes from the Pi (or the DAC+'s pass-through header)
+2,"J2, J3",2,CUI Devices,SDS-50J,"5-pin DIN socket, 180 degree, PCB mount (MIDI IN, MIDI OUT)",Through-hole,THT,Back edge; faces through the back panel; CHECK centre height 10.5 mm above the board
+3,U1,1,onsemi,H11L1SR2M,Optocoupler for MIDI IN (Schmitt output),SMD-6,SMD,Isolation as the MIDI 1.0 specification requires
+4,D1,1,onsemi,1N4148W,Reverse diode across the MIDI IN optocoupler LED,SOD-123,SMD,
+5,U2,1,Texas Instruments,SN74LVC1G125DBVR,Buffer driving MIDI OUT,SOT-23-5,SMD,
+6,"FB1, FB2",2,Murata,BLM18PG221SN1D,Ferrite beads on MIDI OUT pins 4 and 5,0603,SMD,
+7,Q1,1,onsemi,2N7002LT1G,"N-MOSFET, switches the ON/OFF button's light ring from 5 V",SOT-23,SMD,
+8,J4,1,JST,SM08B-SRSS-TB(LF)(SN),"8-pin JST SH: display (3.3 V, GND, SCK, MOSI, CS, DC, RESET, spare)",SMD,SMD,
+9,J5,1,JST,SM04B-SRSS-TB(LF)(SN),"4-pin JST SH: ON/OFF light ring (+, -) and RESET button",SMD,SMD,
+10,"J6, J7",2,JST,SM02B-SRSS-TB(LF)(SN),"2-pin JST SH: ON/OFF switch in (J6), out to the Pi 5's power-button header (J7)",SMD,SMD,CHECK the Pi 5 J2 connector
+11,R1,1,Any,,220 ohm 1% (MIDI IN current limit),0402,SMD,
+12,R2,1,Any,,470 ohm 1% (MIDI IN pull-up),0402,SMD,
+13,"R3, R4",2,Any,,"33 ohm and 10 ohm 1% (MIDI OUT, MIDI 1.0 3.3 V electrical spec)",0603,SMD,
+14,R5,1,Any,,"Light-ring series resistor (value to suit the button's LED, if it has none built in)",0603,SMD,CHECK against the chosen button
+15,"R6-R8",3,Any,,"10 k 1% (gate pull-down, RESET pull-up, spare)",0402,SMD,
+16,"C1-C4",4,Any,,100 nF 16 V X7R (decoupling),0402,SMD,
+17,C5,1,Any,,10 uF 10 V X5R (3.3 V bulk),0603,SMD,

@@ -1,12 +1,11 @@
 # Ordering from PCBWay
 
-Two orders: the Cecilia HAT and its button board (made and assembled), and the
-case. The Raspberry Pi 5, its power supply, the OLED module and the screws are
-bought separately ([bom/off-board.csv](../bom/off-board.csv)).
+Two orders: the Cecilia I/O board (made and assembled), and the case. The
+Raspberry Pi 5, its power supply, the display, the DAC+, the panel cables and
+the screws are bought separately ([bom/off-board.csv](../bom/off-board.csv)).
+For what it all costs, see [COST.md](COST.md).
 
-## 1. HAT and button board (PCB + assembly)
-
-Both boards go on one panel, and are snapped apart after assembly.
+## 1. I/O board (PCB + assembly)
 
 ### What PCBWay needs
 
@@ -14,15 +13,15 @@ Both boards go on one panel, and are snapped apart after assembly.
 | --- | --- | --- |
 | Gerber and drill files | The KiCad layout | To do: needs the schematic and layout |
 | Pick-and-place (CPL / centroid) file | The KiCad layout | To do |
-| Bill of materials | [bom/hat-bom.csv](../bom/hat-bom.csv) (PCBWay's column layout) | Draft: final counts and designators come from the schematic |
+| Bill of materials | [bom/io-bom.csv](../bom/io-bom.csv) (PCBWay's column layout) | Draft: final counts and designators come from the schematic |
 | Assembly drawing | The KiCad layout | To do |
 
 ### Board options
 
 | Option | Choose |
 | --- | --- |
-| Size | HAT 65 × 56 mm and button board 26 × 14 mm, panelised with V-cuts or mouse bites |
-| Quantity | 5 panels for the first prototypes |
+| Size | 48 × 85 mm |
+| Quantity | 5 for the first prototypes |
 | Layers | 2 |
 | Material | FR-4, TG150 |
 | Thickness | 1.6 mm |
@@ -39,26 +38,26 @@ Both boards go on one panel, and are snapped apart after assembly.
 | Option | Choose |
 | --- | --- |
 | Service | Turnkey (PCBWay sources parts) |
-| Sides | Top side SMT, plus through-hole (40-pin header, DIN sockets, jack) |
+| Sides | Top side SMT, plus through-hole (box header, DIN sockets) |
 | Quantity | 5 |
 | Consigned | None |
 
 ### Notes to put on the order
 
-- The 40-pin header (J1) goes on the **underside** of the HAT; everything else
-  on top.
-- The HAT+ EEPROM (U1) is programmed after assembly; we do this.
+- Everything goes on the top side.
+- Nothing needs programming: the board has no chips with firmware.
 
 ## 2. Case
 
-Plastic, not metal: the Pi's own Wi-Fi has to get out. Four parts, made by
+Plastic, not metal: the Pi's own Wi-Fi has to get out. The box is
+220 × 150 × 42 mm. Four files, made by
 `npm run build` in [case/](../case/):
 
 | File | Part |
 | --- | --- |
 | `case/out/case-base.stl` | Base tray |
 | `case/out/case-lid.stl` | Lid |
-| `case/out/case-window.stl` | Smoked window for the OLED (or cut it from 1 mm smoked acrylic) |
+| `case/out/case-window.stl` | Smoked window for the display (or cut it from 1 mm smoked acrylic) |
 | `case/out/case-labels.stl` | Not printed: the shape of the white label fill, for reference |
 
 Sizes are in `case/out/dimensions.json`.
@@ -70,7 +69,7 @@ Sizes are in `case/out/dimensions.json`.
 | Process | MJF (HP Multi Jet Fusion) |
 | Material | PA12 nylon, dyed black |
 | Finish | Bead-blasted |
-| Inserts | M2.5 heat-set inserts in the four bosses under the Pi (we fit these) |
+| Inserts | M2.5 heat-set inserts under the Pi and the I/O board, M3 in the four corner pillars (we fit these) |
 | Quantity | 2 sets |
 
 SLA in a tough resin is an alternative with a smoother finish. The engraved

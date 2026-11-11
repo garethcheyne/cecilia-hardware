@@ -1,8 +1,8 @@
 # Future option: Compute Module 5 carrier board
 
-> Kept for later. The current design is a Raspberry Pi 5 with the Cecilia HAT
-> (see [../SPEC.md](../SPEC.md)): it reuses the Pi 5's own approvals and is
-> repairable by swapping the Pi. This carrier only makes sense at volumes where
+> Kept for later. The current design is a Raspberry Pi 5 with the Cecilia I/O
+> board (see [../SPEC.md](../SPEC.md)): it reuses the Pi 5's own approvals and
+> is repairable by swapping the Pi. This carrier only makes sense at volumes where
 > a custom board and a full certification are worth it. Its parts list is
 > [bom/future/cm5-carrier-bom.csv](../../bom/future/cm5-carrier-bom.csv); its
 > case (132 × 102 × 37 mm) is in the git history.

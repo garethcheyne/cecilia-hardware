@@ -1,32 +1,34 @@
-// Where everything sits in the Cecilia unit (Raspberry Pi 5 + Cecilia HAT),
-// shared by the case, the internal models and the renders. Millimetres.
+// Where everything sits in the Cecilia unit, shared by the case, the models
+// of the parts inside and the renders. Millimetres.
 //
-// Case coordinates: x left to right as seen from the BACK (so the front
-// panel's right is −x), y from back (−) to front (+), z up from the bottom.
+// A flat box: a Raspberry Pi 5 (with room for a Raspberry Pi DAC+ on top), the
+// Cecilia I/O board (MIDI) and a wide OLED. Every socket and control is on
+// the back; the front has only the display.
+//
+// Case coordinates: x left to right as seen from the BACK (so the front's
+// left is +x), y from back (−) to front (+), z up from the bottom.
 //
 // The Pi 5's connector positions follow Raspberry Pi's mechanical drawing as
-// best known here; CHECK them against the current "Raspberry Pi 5 mechanical
-// drawing" PDF before ordering a case.
+// best known here, and the panel-mount parts are typical sizes: everything
+// marked CHECK must be measured against the real part before ordering a case.
 
-export const CASE = {
-  w: 126,
-  d: 66,
-  wall: 2.4,
-  floor: 2.4,
-  baseH: 0, // base tray, floor to rim (the lid's underside): set below from the standoff stack
-  lidH: 4,
-  r: 6,
-}
+export const CASE = { w: 220, d: 150, h: 42, wall: 2.4, floor: 2.4, lidH: 3.2, r: 8 }
+CASE.baseH = CASE.h - CASE.lidH // base tray, floor to rim (the lid's underside)
 export const IN = { w: CASE.w - 2 * CASE.wall, d: CASE.d - 2 * CASE.wall }
+const backIn = -CASE.d / 2 + CASE.wall // inside face of the back wall
+const frontIn = CASE.d / 2 - CASE.wall // inside face of the front wall
+export const FACES = { backIn, frontIn }
 
-// The Pi sits against the right and back walls, so its ports reach them.
+// The Raspberry Pi 5, turned so its USB and Ethernet come straight through the
+// back wall. Its power and micro HDMI edge faces left (seen from the back);
+// short panel-mount cables bring those to the back panel.
 export const PI = {
   w: 85,
   d: 56,
   t: 1.6,
-  x0: IN.w / 2 - 0.6 - 85, // case x of the Pi's left edge
-  y0: -IN.d / 2 + 1.6, // case y of the Pi's back edge (power, HDMI)
-  z: CASE.floor + 4, // underside of the Pi's board (on 4 mm bosses)
+  z: CASE.floor + 3, // underside of the board, on 3 mm bosses
+  x0: -13, // case x of the Pi's power/HDMI edge
+  edgeY: backIn + 2.5, // case y of the Pi's USB/Ethernet edge (its sockets reach the wall)
   holes: [
     [3.5, 3.5],
     [61.5, 3.5],
@@ -35,58 +37,54 @@ export const PI = {
   ],
 }
 PI.top = PI.z + PI.t
-/** A point on the Pi (its own coordinates) in case coordinates. */
-export const onPi = (px, py, z = PI.top) => [PI.x0 + px, PI.y0 + py, z]
+/** A point on the Pi in case coordinates. px runs along the Pi's long edge
+ * (85 = the USB/Ethernet end), py across it (0 = the power/HDMI edge). */
+export const onPi = (px, py, z = PI.top) => [PI.x0 + py, PI.edgeY + (PI.w - px), z]
+export const PI_HOLES = PI.holes.map(([px, py]) => onPi(px, py))
 
-// The Cecilia HAT: standard HAT+ size (65 x 56), 12 mm above the Pi. Its
-// sockets line its back edge, above the Pi's power and HDMI sockets.
-export const HAT = { z: PI.top + 12, t: 1.6, w: 65, d: 56 }
-HAT.top = HAT.z + HAT.t
+// The optional Raspberry Pi DAC+ (65 x 58 mm) on the Pi's header: about
+// 31 mm tall fitted, from the Pi's underside to the top of its phono sockets.
+// Its phono sockets are drawn on the edge away from the header (CHECK).
+export const DAC = { z: PI.top + 11.5, t: 1.6, w: 65, d: 58, top: PI.z + 31 }
+DAC.boardTop = DAC.z + DAC.t
 
-// The lid sits on stock 25 mm standoffs above the HAT, so the base's height
-// follows from the stack: no cut-to-length parts.
-CASE.baseH = HAT.top + 25
+// The Cecilia I/O board: MIDI IN and OUT, the display and button connections.
+// Flat on the floor at the back right, joined to the Pi's GPIO (or the DAC+'s
+// pass-through header) by a short 40-way ribbon.
+export const IO = { x0: 49, x1: 97, y0: backIn + 1, y1: backIn + 86, z: CASE.floor + 3, t: 1.6 }
+IO.top = IO.z + IO.t
 
-// Front panel (y = +d/2): kept clean. x in case coordinates; the panel's
-// left, seen from the front, is +x.
-export const FRONT = {
-  // Window for the 1.3" OLED. The module's board is 35.5 x 33.5 with the
-  // glass 1 mm above its centre; the board's top stays clear of the lid.
-  oled: { x: -42.8, z: 28, w: 31, h: 17 },
-  led: { x: -15, z: 28, d: 3.2 }, // status light, beside the screen
-  brand: { x: 22, z: 28 }, // the mark and wordmark, engraved
-}
-
-// Back panel (y = −d/2). Seen from the back, left to right is +x.
-// Lower row: the Pi's own power and screen sockets.
+// Back panel (y = −d/2). Seen from the back, left to right is +x. Two label
+// lines: above the upper row, below the lower row.
+const UPPER = 24.5
+const LOWER = 12
+export const LABEL_Z = { above: 33.2, below: 4.4 }
 export const BACK = [
-  { x: onPi(11.2, 0)[0], z: PI.top + 1.6, w: 12, h: 7.5, label: "USB-C 5V", shape: "slot" },
-  { x: onPi(25.8, 0)[0], z: PI.top + 1.5, w: 11, h: 7.5, label: "HDMI 0", shape: "rect" },
-  { x: onPi(39.2, 0)[0], z: PI.top + 1.5, w: 11, h: 7.5, label: "HDMI 1", shape: "rect" },
+  // Power and controls
+  { x: -91, z: UPPER, d: 12.2, shape: "round", label: "ON/OFF", at: "above", part: "onoff" },
+  { x: -78, z: UPPER, d: 7.2, shape: "round", label: "RESET", at: "above", part: "reset" },
+  { x: -84, z: LOWER, w: 12.6, h: 6.4, shape: "slot", label: "USB-C 5V", at: "below", part: "usbc", screws: 10 },
+  // Screens (micro HDMI to HDMI panel-mount cables)
+  { x: -52, z: UPPER, w: 16, h: 7, shape: "rect", label: "HDMI 1", at: "above", part: "hdmi", screws: 13 },
+  { x: -52, z: LOWER, w: 16, h: 7, shape: "rect", label: "HDMI 2", at: "below", part: "hdmi", screws: 13 },
+  // Audio from the optional DAC+ (through-panel phono couplers)
+  { x: -26, z: UPPER, d: 8.2, shape: "round", label: "AUDIO L", at: "above", part: "rca" },
+  { x: -26, z: LOWER, d: 8.2, shape: "round", label: "AUDIO R", at: "below", part: "rca" },
+  // The Pi's own sockets
+  { x: onPi(0, 9)[0], z: PI.top + 8, w: 15.5, h: 16.6, shape: "rect", label: "USB", at: "above" },
+  { x: onPi(0, 27)[0], z: PI.top + 8, w: 15.5, h: 16.6, shape: "rect", label: "USB 3", at: "above" },
+  { x: onPi(0, 45.75)[0], z: PI.top + 6.9, w: 16.2, h: 14, shape: "rect", label: "ETHERNET", at: "above" },
+  // The organ (on the I/O board)
+  { x: 61, z: IO.top + 10.5, d: 15.8, shape: "round", label: "MIDI IN", at: "above", part: "din" },
+  { x: 85, z: IO.top + 10.5, d: 15.8, shape: "round", label: "MIDI OUT", at: "above", part: "din" },
 ]
 
-// Upper row: the HAT's organ and audio sockets. "above" puts the label over the port.
-export const BACK_HAT = [
-  { x: onPi(17, 0)[0], z: HAT.top + 10.5, d: 15.8, label: "MIDI IN", din: true, above: true },
-  { x: onPi(40, 0)[0], z: HAT.top + 10.5, d: 15.8, label: "MIDI OUT", din: true, above: true },
-  { x: onPi(54, 0)[0], z: HAT.top + 2.6, d: 6.2, label: "LINE OUT" },
-]
+// Front panel (y = +d/2): only the display. A 3.12" 256 x 64 OLED (SSD1322):
+// active area 76.8 x 19.2 mm; module outline varies by maker (CHECK).
+export const FRONT = {
+  oled: { x: 0, z: (CASE.floor + CASE.baseH) / 2, w: 80, h: 22.4, active: [76.8, 19.2] },
+}
+export const OLED_MODULE = { pcb: [100, 31], glass: [88, 27.8], holes: [47, 12.5] }
 
-// ON/OFF (to the Pi 5's power-button header) and a recessed RESET pinhole,
-// on a small button board behind the free left end of the back panel.
-export const BUTTONS = { x: -41, z: 28, w: 26, h: 14 }
-export const BACK_CONTROLS = [
-  { x: -34, z: BUTTONS.z, d: 6.4, label: "ON/OFF" },
-  { x: -48, z: BUTTONS.z, d: 2.2, label: "RESET" },
-]
-
-// Right panel (x = +w/2): the Pi's USB and Ethernet. y in case coordinates.
-export const RIGHT = [
-  { y: onPi(0, 9)[1], z: PI.top + 8, w: 15.5, h: 16.6, label: "USB" },
-  { y: onPi(0, 27)[1], z: PI.top + 8, w: 15.5, h: 16.6, label: "USB 3" },
-  { y: onPi(0, 45.75)[1], z: PI.top + 6.9, w: 16.2, h: 14, label: "ETHERNET" },
-]
-
-// Screw and standoff positions: the Pi's four mounting holes, which the HAT
-// and the lid share (one stack of standard M2.5 standoffs).
-export const STACK = PI.holes.map(([x, y]) => onPi(x, y))
+// Corner pillars for the lid's four screws (M3 into heat-set inserts).
+export const PILLARS = [-1, 1].flatMap((sx) => [-1, 1].map((sy) => [sx * (CASE.w / 2 - 7), sy * (CASE.d / 2 - 7)]))

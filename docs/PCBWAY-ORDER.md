@@ -1,8 +1,12 @@
 # Ordering from PCBWay
 
-Two orders: the carrier board (made and assembled), and the case.
+Two orders: the Cecilia HAT and its button board (made and assembled), and the
+case. The Raspberry Pi 5, its power supply, the OLED module and the screws are
+bought separately ([bom/off-board.csv](../bom/off-board.csv)).
 
-## 1. Carrier board (PCB + assembly)
+## 1. HAT and button board (PCB + assembly)
+
+Both boards go on one panel, and are snapped apart after assembly.
 
 ### What PCBWay needs
 
@@ -10,49 +14,54 @@ Two orders: the carrier board (made and assembled), and the case.
 | --- | --- | --- |
 | Gerber and drill files | The KiCad layout | To do: needs the schematic and layout |
 | Pick-and-place (CPL / centroid) file | The KiCad layout | To do |
-| Bill of materials | `bom/carrier-bom.csv` (PCBWay's column layout) | Draft: final counts and designators come from the schematic |
-| Assembly drawing (top and bottom) | The KiCad layout | To do |
-| Notes | This page | |
+| Bill of materials | [bom/hat-bom.csv](../bom/hat-bom.csv) (PCBWay's column layout) | Draft: final counts and designators come from the schematic |
+| Assembly drawing | The KiCad layout | To do |
 
-### Board options to choose on the order form
+### Board options
 
 | Option | Choose |
 | --- | --- |
-| Size | 124 × 94 mm |
-| Quantity | 5 for the first prototypes |
-| Layers | 4 |
-| Material | FR-4, TG170 |
+| Size | HAT 65 × 56 mm and button board 26 × 14 mm, panelised with V-cuts or mouse bites |
+| Quantity | 5 panels for the first prototypes |
+| Layers | 2 |
+| Material | FR-4, TG150 |
 | Thickness | 1.6 mm |
-| Min track / spacing | 0.1 mm / 0.1 mm (4 mil) |
-| Min hole | 0.2 mm |
-| Impedance control | Yes: 90 Ω and 100 Ω differential (stack-up from PCBWay) |
-| Surface finish | ENIG (flat pads for the 0.4 mm CM5 connectors) |
+| Min track / spacing | 0.15 mm / 0.15 mm (6 mil) |
+| Min hole | 0.3 mm |
+| Impedance control | No |
+| Surface finish | HASL lead-free (ENIG if the price difference is small) |
 | Solder mask | Matt black |
 | Silkscreen | White |
-| Copper | 1 oz outer, 0.5 oz inner |
+| Copper | 1 oz |
 
 ### Assembly options
 
 | Option | Choose |
 | --- | --- |
 | Service | Turnkey (PCBWay sources parts) |
-| Sides | Top side SMT, plus through-hole (DIN, RJ45, USB-A, jack, switch) |
+| Sides | Top side SMT, plus through-hole (40-pin header, DIN sockets, jack) |
 | Quantity | 5 |
-| Inspection | X-ray for the QFN parts (RP2040, STUSB4500) and the CM5 connectors |
-| Not fitted | J12 (fan) unless requested |
-| Consigned | None (the CM5, cooler, antenna and battery are fitted by us, see `bom/off-board.csv`) |
+| Consigned | None |
 
 ### Notes to put on the order
 
-- The two 100-pin connectors (J2, J3) take a Raspberry Pi Compute Module 5;
-  the module is not part of this order.
-- U1 (STUSB4500) needs its NVM programming after assembly; we do this.
-- U7 (RP2040) is programmed over USB after assembly; we do this.
+- The 40-pin header (J1) goes on the **underside** of the HAT; everything else
+  on top.
+- The HAT+ EEPROM (U1) is programmed after assembly; we do this.
 
 ## 2. Case
 
-Two parts: `case/out/case-base.stl` and `case/out/case-lid.stl`
-(`npm run build` in `case/`). Sizes are in `case/out/dimensions.json`.
+Plastic, not metal: the Pi's own Wi-Fi has to get out. Four parts, made by
+`npm run build` in [case/](../case/):
+
+| File | Part |
+| --- | --- |
+| `case/out/case-base.stl` | Base tray |
+| `case/out/case-lid.stl` | Lid |
+| `case/out/case-window.stl` | Smoked window for the OLED (or cut it from 1 mm smoked acrylic) |
+| `case/out/case-labels.stl` | Not printed: the shape of the white label fill, for reference |
+
+Sizes are in `case/out/dimensions.json`.
 
 ### Prototypes: 3D printed
 
@@ -61,23 +70,29 @@ Two parts: `case/out/case-base.stl` and `case/out/case-lid.stl`
 | Process | MJF (HP Multi Jet Fusion) |
 | Material | PA12 nylon, dyed black |
 | Finish | Bead-blasted |
-| Inserts | M3 heat-set inserts into the lid's four bosses (we fit these) |
+| Inserts | M2.5 heat-set inserts in the four bosses under the Pi (we fit these) |
 | Quantity | 2 sets |
 
-The engraved mark and labels print as recesses; a white paint-fill makes them
-stand out.
+SLA in a tough resin is an alternative with a smoother finish. The engraved
+mark and labels print as recesses; fill them with white paint (or ask PCBWay
+for UV printing on the panels).
 
-### Production: CNC aluminium
+### Production: injection moulding
+
+At a few hundred units, injection moulding becomes cheaper per case than
+printing. Moulding needs a tooling quote from PCBWay, and the design needs:
+
+- draft angles on every wall (about 1°);
+- even wall thickness (2–2.5 mm);
+- the bosses joined to the walls by ribs, not solid;
+- the labels as raised pad-print areas, or printed after moulding, rather
+  than engraved.
 
 | Option | Choose |
 | --- | --- |
-| Process | CNC milling |
-| Material | Aluminium 6061-T6 |
-| Finish | Bead-blast, then black or graphite anodise (Type II) |
-| Marking | Laser-engrave the mark, wordmark and port labels after anodising (they come out bright silver, as in the renders) |
-| Threads | M3 tapped in the lid's four bosses |
-| Quantity | 5 (quote 50 and 100 as well) |
+| Material | PC/ABS, black, matt texture (e.g. MT-11010) |
+| Marking | Pad print or UV print the mark and labels in white |
+| Quantity | Quote 250, 500 and 1000 |
 
-For CNC, PCBWay prefers STEP files: import the STL into Fusion or FreeCAD and
-export STEP, or have the case modelled in CAD from `case/out/dimensions.json`.
-Anodised aluminium blocks radio, which is why the Wi-Fi antenna is external.
+PCBWay will want STEP files for moulding: model the case in Fusion or FreeCAD
+from `case/out/dimensions.json`, using the STL files as the reference.

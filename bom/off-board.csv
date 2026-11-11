@@ -1,13 +1,20 @@
 Item #,Qty,Manufacturer,Mfg Part #,Description,Where it goes,Notes
-1,1,Raspberry Pi,CM5104032,"Compute Module 5: wireless, 4 GB RAM, 32 GB eMMC",On J2/J3,US$140 list (Nov 2026 product brief). CM5102032 (2 GB) suits a unit without screens: US$107.50
-2,1,Raspberry Pi,,"Cooler for Compute Module 5 (heatsink)",On the CM5,Needed in a closed case
-3,1,Raspberry Pi,,"Antenna Kit (external 2.4/5 GHz antenna, SMA bulkhead, U.FL cable)",Back panel WI-FI hole,The antenna Raspberry Pi tested with the module; keeps the wireless approvals valid
-4,1,Raspberry Pi,,RTC battery (rechargeable lithium manganese cell with JST SH lead),J11,Keeps the clock without power or internet
-5,1,Raspberry Pi,,27 W USB-C power supply (5.1 V 5 A),Back panel POWER,Region-specific plug
-6,1,Any,,"3 mm light pipe, 10 mm long",Front panel status light,
-7,4,Any,,M2.5 x 5 pan-head screw,Board to base standoffs,
-8,4,Any,,M3 x 30 countersunk screw (stainless),Base to lid,
-9,4,Any,,M3 heat-set insert (for printed lids) or tapped hole (for aluminium),Lid bosses,
-10,4,Any,,"Self-adhesive rubber foot, 10 mm",Base recesses,
-11,1,Case,case/out/case-base.stl,Base tray,,"See docs/PCBWAY-ORDER.md, Case"
-12,1,Case,case/out/case-lid.stl,Lid with the Cecilia mark,,"See docs/PCBWAY-ORDER.md, Case"
+1,1,Raspberry Pi,,"Raspberry Pi 5, 4 GB",On the lower standoffs,2 GB is enough without console screens; any Pi 5 from any shop fits
+2,1,Raspberry Pi,,Raspberry Pi 27 W USB-C power supply (5.1 V 5 A),Back panel USB-C 5V,Region-specific plug; keeps the unit within Raspberry Pi's tested setup
+3,1,Any,,"Low-profile heatsink for the Pi 5 SoC (under 8 mm tall)",On the Pi 5,CHECK clearance under the HAT; Raspberry Pi's Active Cooler if it fits
+4,1,Raspberry Pi,,"microSD card, 32 GB, A2",Pi 5 card slot,Flashed with the Cecilia image (Raspberry Pi Imager)
+5,1,Any,,"1.3 inch OLED module, 128x64, SH1106, I2C (4-pin)",Front panel window,CHECK the hole spacing (case expects 30.4 x 28.5 mm)
+6,1,Any,,"3 mm LED with panel clip, green, on a 2-pin JST SH lead",Front panel status light,
+7,1,Any,,"4-wire JST SH cable, 100 mm",OLED to HAT J5,
+8,1,Any,,"4-wire JST SH cable, 100 mm",Button board to HAT J7,
+9,1,Any,,"2-wire lead, JST SH to the Pi 5's power-button header",HAT J8 to Pi 5 J2,CHECK the J2 connector type
+10,4,Any,,"M2.5 x 12 mm brass standoff, male-female",Pi to HAT (through the Pi into the base),
+11,4,Any,,"M2.5 x 25 mm brass standoff, male-female",HAT to lid,
+12,4,Any,,M2.5 x 6 countersunk screw (stainless),Lid into the standoffs,
+13,4,Any,,M2.5 heat-set insert,Base bosses under the Pi,
+14,6,Any,,M2 x 5 self-tapping screw for plastic,OLED module and button board to their bosses,
+15,4,Any,,"Self-adhesive rubber foot, 10 mm",Base recesses,
+16,1,Case,case/out/case-base.stl,Base tray,,"See docs/PCBWAY-ORDER.md, Case"
+17,1,Case,case/out/case-lid.stl,Lid with the Cecilia mark,,"See docs/PCBWAY-ORDER.md, Case"
+18,1,Case,case/out/case-window.stl,"Smoked window for the OLED (1 mm, tinted)",Front panel rebate,Cut from 1 mm smoked acrylic or polycarbonate
+19,1,Case,,"ON/OFF button cap (printed, 5.8 mm)",Back panel,Print with the case
